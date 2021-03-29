@@ -120,17 +120,12 @@ int main() {
 		//Draw A shape
 		//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		while (!doneDrawing) {
+			
 			while (window.pollEvent(event)) {
 				switch (event.type) {
 				case sf::Event::Closed:
 					window.close();
 					return 0;
-					break;
-
-				case sf::Event::MouseButtonPressed:
-					if (event.mouseButton.button == sf::Mouse::Left) {
-						grid[(int)event.mouseButton.x / CELL_SIZE][(int)event.mouseButton.y / CELL_SIZE] = 1;
-					}
 					break;
 
 				case sf::Event::KeyPressed:
@@ -139,6 +134,14 @@ int main() {
 					}
 					break;
 				}
+			}
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+				grid[(int)sf::Mouse::getPosition(window).x / CELL_SIZE][(int)sf::Mouse::getPosition(window).y / CELL_SIZE] = 1;
+			}
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+				grid[(int)sf::Mouse::getPosition(window).x / CELL_SIZE][(int)sf::Mouse::getPosition(window).y / CELL_SIZE] = 0;
 			}
 
 			window.clear(sf::Color(255, 255, 255));
@@ -185,7 +188,7 @@ int main() {
 			}
 		}
 	}
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	return 0;
 }
